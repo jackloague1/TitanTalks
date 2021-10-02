@@ -3,16 +3,16 @@ Titan Talks is a social media platform designed and created specifically for Tit
 
 ## Environment Installation
 * Download and install NodeJS [https://nodejs.org/](https://nodejs.org/en/)
-* Run `sudo npm install --global yarn` to install Yarn
+* (Optional) Run `sudo npm install --global yarn` to install Yarn.
 
 ## Project's Dependencies Installation
 * Navigate to the `mobileapp` directory
-* Run `yarn` to install the project's dependencies. 
+* Run `npm install` or `yarn` to install the project's dependencies. 
 
 ## How to run the mobile app
 Navigate to the `mobileapp` directory and run one of the following yarn commands.
-* Run `yarn android` to build & run the app on android device.
-* Run `yarn ios` to build & run the app on IOS device.
+* Run `npm run android` or `yarn android` to build & run the app on android device.
+* Run `npm run ios` or `yarn ios` to build & run the app on IOS device.
 
 ## How to run the server
 * Navigate to the directory named `server`.
