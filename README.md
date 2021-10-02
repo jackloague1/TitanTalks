@@ -11,8 +11,8 @@ Titan Talks is a social media platform designed and created specifically for Tit
 
 ## How to run the mobile app
 Navigate to the `mobileapp` directory and run one of the following yarn commands.
-* Run `npm run android` or `yarn android` to build & run the app on android device.
-* Run `npm run ios` or `yarn ios` to build & run the app on IOS device.
+* Run `npm run android` or `yarn android` to build & run the app on android device/emulator.
+* Run `npm run ios` or `yarn ios` to build & run the app on IOS device/emulator.
 
 ## How to run the server
 * Navigate to the directory named `server`.
