@@ -1,10 +1,15 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native';
+import { AuthContext } from '../components/Context';
+import * as AuthHelper from '../utils/AuthHelper';
 
 const ProfileScreen = ({navigation}) => {
+	const { logout } = React.useContext(AuthContext);
+
 	return (
 		<View style={styles.container}>
 			<Text>This is Profile Screen</Text>
+			<Button onPress={logout} title="Logout" />
 		</View>
 	);
 }
