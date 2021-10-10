@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import TabNavigator from './components/TabBar';
+import TabNavigator from './components/TabNavigator';
 import LoginScreen from './screens/LoginScreen';
 import { AuthContext } from './components/Context';
 import * as AuthHelper from './utils/AuthHelper';
