@@ -10,18 +10,33 @@ import * as AuthHelper from './utils/AuthHelper';
 const Stack = createStackNavigator();
 
 export default function App() {
-	const [userToken, setUserToken] = React.useState(null);	
+	const [userToken, setUserToken] = React.useState(null);
+
+	function printUserInfo() {
+		AuthHelper.getUserInfo().then((data)=> {
+			if (data) {
+				console.log('User Info:')
+				console.log(`  |- UserID: ${data['id']}`);
+				console.log(`  |- Username: ${data['login']}`);
+				console.log(`  |- Fullname: ${data['name']}`);
+				console.log(`  |- Avartar URL: ${data['avatar_url']}`);
+			}
+		});
+	}
 
 	React.useEffect(() => {
 		// Fetch the token from storage then save it to UserToken state
 		const bootstrapAsync = async () => {	
 			try {
-				tk = await AuthHelper.getAccessToken();
-				await setUserToken(tk);
-				console.log('---------- USER TOKEN ----------');
-				console.log(tk);
+				token = await AuthHelper.getAccessToken();
+				await setUserToken(token);
+				console.log('---------- App Start ----------');
+				console.log(`Access Token: ${token}`);
+				if (token) {
+					printUserInfo();
+				}
 			} catch (e) {
-			console.log('Restoring token failed');
+				console.log('Restoring token failed');
 			}
 		};
 		
@@ -32,6 +47,8 @@ export default function App() {
 		login: async (data) => {
 			await AuthHelper.loginWithGitHub(async () => {
 				await setUserToken(await AuthHelper.getAccessToken());
+				console.log('Login successful');
+				printUserInfo();
 			});
 		},
 		logout: () => {

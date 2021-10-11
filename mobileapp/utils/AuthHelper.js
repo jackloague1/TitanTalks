@@ -25,7 +25,6 @@ export async function loginWithGitHub(onSuccessHandler) {
 		Linking.addEventListener('url', handleGitHubRedirect);
 		console.log(Linking.createURL());
 		await WebBrowser.openBrowserAsync(`https://github.com/login/oauth/authorize?client_id=${gho_client_id}&redirect_uri=${Linking.createURL()}/&scope=user`);
-		
 	} catch (error) {
 		console.log(error);
 	}
@@ -63,20 +62,30 @@ async function handleGitHubRedirect(event) {
 
 	let data  = Linking.parse(event.url);
 	let code = data.queryParams['code'];
-	console.log(data);
+	
+	console.log(`GitHub temporary code: ${code}`);
+	
 	if (code != null) {
-		let token = await requestGitHubAccessToken(code);
-		await setAccessToken(token);
+		try {
+			console.log('Requesting GitHub Access Tokken');
+			let token = await requestGitHubAccessToken(code);			
+			await setAccessToken(token);
+			console.log(`Saved the token to Keychain/Keystore successful`);
 
-		if (Platform.OS == 'ios') {
-			WebBrowser.dismissBrowser();
-		}
+			if (Platform.OS == 'ios') {
+				WebBrowser.dismissBrowser();
+			}
 
-		loginSuccessCallback();
+			if (loginSuccessCallback) {
+				loginSuccessCallback();
+			}
+		} catch (error) {
+			
+		}		
 	}	
 }
 
-export async function getUser() {
+export async function getUserInfo() {
 	try {
 		const response = await fetch('https://api.github.com/user', {
 			method: 'GET',
