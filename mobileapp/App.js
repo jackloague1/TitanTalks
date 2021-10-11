@@ -15,20 +15,24 @@ export default function App() {
 	React.useEffect(() => {
 		// Fetch the token from storage then save it to UserToken state
 		const bootstrapAsync = async () => {	
-		  try {
-			setUserToken(await AuthHelper.getAccessToken());
-		  } catch (e) {
+			try {
+				tk = await AuthHelper.getAccessToken();
+				await setUserToken(tk);
+				console.log('---------- USER TOKEN ----------');
+				console.log(tk);
+			} catch (e) {
 			console.log('Restoring token failed');
-		  }
+			}
 		};
-	
+		
 		bootstrapAsync();
 	  }, []);
 
 	const authContext = React.useMemo(() => ({
 		login: async (data) => {
-			await AuthHelper.loginWithGitHub();
-			setUserToken(await AuthHelper.getAccessToken());
+			await AuthHelper.loginWithGitHub(async () => {
+				await setUserToken(await AuthHelper.getAccessToken());
+			});
 		},
 		logout: () => {
 			setUserToken(null);

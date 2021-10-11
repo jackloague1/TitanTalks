@@ -9,14 +9,23 @@ import * as WebBrowser from 'expo-web-browser';
 import * as SecureStore from 'expo-secure-store';
 
 /***********************************************************/
+/********************** Client Configs *********************/
+/***********************************************************/
+// These secret keys should be store in .env file.
+const gho_client_id = '91a6f70a71bfd3da345f';
+const gho_client_secret = 'a7314b1c7dd63a3207d0ff759c37c009cf5c3632';
+
+/***********************************************************/
 /********************* GitHub's OAuth **********************/
 /***********************************************************/
-export async function loginWithGitHub() {
+let loginSuccessCallback;
+export async function loginWithGitHub(onSuccessHandler) {
 	try	{
+		loginSuccessCallback = onSuccessHandler;
 		Linking.addEventListener('url', handleGitHubRedirect);
-		let result = await WebBrowser.openBrowserAsync('https://github.com/login/oauth/authorize' + '?client_id=91a6f70a71bfd3da345f' + '&scope=user');
-    	console.log(result['type']);
-		return result['type'];
+		console.log(Linking.createURL());
+		await WebBrowser.openBrowserAsync(`https://github.com/login/oauth/authorize?client_id=${gho_client_id}&redirect_uri=${Linking.createURL()}/&scope=user`);
+		
 	} catch (error) {
 		console.log(error);
 	}
@@ -35,8 +44,8 @@ async function requestGitHubAccessToken(code) {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				client_id: '91a6f70a71bfd3da345f',
-				client_secret: 'a7314b1c7dd63a3207d0ff759c37c009cf5c3632',
+				client_id: gho_client_id,
+				client_secret: gho_client_secret,
 				code: code,				
 			})
 		})
@@ -54,14 +63,16 @@ async function handleGitHubRedirect(event) {
 
 	let data  = Linking.parse(event.url);
 	let code = data.queryParams['code'];
-	
+	console.log(data);
 	if (code != null) {
 		let token = await requestGitHubAccessToken(code);
 		await setAccessToken(token);
 
-		if (Platform.OS = 'ios') {
+		if (Platform.OS == 'ios') {
 			WebBrowser.dismissBrowser();
 		}
+
+		loginSuccessCallback();
 	}	
 }
 
