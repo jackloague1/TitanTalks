@@ -2,8 +2,8 @@ BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS "User" (
 	"User_id"	TEXT NOT NULL UNIQUE,
 	"Username"	TEXT,
-	"Email"		TEXT,
 	"Fullname"	TEXT,
+	"Email"		TEXT,
 	"Avatar"	BLOB,
 	"Bio"		TEXT,
 	"Sex"		TEXT,
