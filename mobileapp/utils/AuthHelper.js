@@ -14,17 +14,30 @@ import * as SecureStore from 'expo-secure-store';
 // These secret keys should be store in .env file.
 const gho_client_id = '91a6f70a71bfd3da345f';
 const gho_client_secret = 'a7314b1c7dd63a3207d0ff759c37c009cf5c3632';
+const feathersOAuthUrl = 'http://localhost:3030/oauth/github';
 
 /***********************************************************/
 /********************* GitHub's OAuth **********************/
 /***********************************************************/
 let loginSuccessCallback;
+
 export async function loginWithGitHub(onSuccessHandler) {
 	try	{
 		loginSuccessCallback = onSuccessHandler;
 		Linking.addEventListener('url', handleGitHubRedirect);
 		console.log(Linking.createURL());
 		await WebBrowser.openBrowserAsync(`https://github.com/login/oauth/authorize?client_id=${gho_client_id}&redirect_uri=${Linking.createURL()}/&scope=user`);
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export async function loginWithGitHubThruFeathers(onSuccessHandler) {
+	try	{
+		loginSuccessCallback = onSuccessHandler;
+		Linking.addEventListener('url', handleFeathersRedirect);
+		console.log(Linking.createURL());
+		await WebBrowser.openBrowserAsync(feathersOAuthUrl);
 	} catch (error) {
 		console.log(error);
 	}
@@ -80,9 +93,35 @@ async function handleGitHubRedirect(event) {
 				loginSuccessCallback();
 			}
 		} catch (error) {
-			
+			console.log(error);
 		}		
 	}	
+}
+
+async function handleFeathersRedirect(event) {
+	Linking.removeEventListener('url', handleFeathersRedirect);
+	
+	// "Look behind" Regex doesn't work with this version of React
+	// Temporary work around. Bugs might happen.
+	let token = event.url.match(/[^=]*$/)[0];
+	console.log(token);
+
+	if (token.length > 100) {
+		try {
+			await setAccessToken(token);
+			console.log(`Saved the token to Keychain/Keystore successful`);
+
+			if (Platform.OS == 'ios') {
+				WebBrowser.dismissBrowser();
+			}
+
+			if (loginSuccessCallback) {
+				loginSuccessCallback();
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 export async function getUserInfo() {
@@ -101,6 +140,7 @@ export async function getUserInfo() {
 	  console.error(error);
 	}
 }
+
 /***********************************************************/
 /******************* Access Token Store ********************/
 /***********************************************************/

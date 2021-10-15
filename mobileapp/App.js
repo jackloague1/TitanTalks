@@ -45,7 +45,7 @@ export default function App() {
 
 	const authContext = React.useMemo(() => ({
 		login: async (data) => {
-			await AuthHelper.loginWithGitHub(async () => {
+			await AuthHelper.loginWithGitHubThruFeathers(async () => {
 				await setUserToken(await AuthHelper.getAccessToken());
 				console.log('Login successful');
 				printUserInfo();
