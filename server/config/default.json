@@ -28,7 +28,7 @@
       "passwordField": "password"
     },
     "oauth": {
-      "redirect": "/",
+      "redirect": "exp://127.0.0.1:19000/",
       "google": {
         "key": "<google oauth key>",
         "secret": "<google oauth secret>",
@@ -47,8 +47,8 @@
         "secret": "<twitter oauth secret>"
       },
       "github": {
-        "key": "<github oauth key>",
-        "secret": "<github oauth secret>"
+        "key": "91a6f70a71bfd3da345f",
+        "secret": "a7314b1c7dd63a3207d0ff759c37c009cf5c3632"
       }
     }
   },
