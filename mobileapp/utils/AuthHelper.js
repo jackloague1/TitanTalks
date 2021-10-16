@@ -7,14 +7,16 @@ import * as Linking from "expo-linking";
 import { Platform } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as SecureStore from 'expo-secure-store';
+import { API_URL } from 'react-native-dotenv'
 
 /***********************************************************/
-/********************** Client Configs *********************/
+/************** GitHub Direct Connect Configs **************/
 /***********************************************************/
-// These secret keys should be store in .env file.
-const gho_client_id = '91a6f70a71bfd3da345f';
-const gho_client_secret = 'a7314b1c7dd63a3207d0ff759c37c009cf5c3632';
-const feathersOAuthUrl = 'http://localhost:3030/oauth/github';
+/******* Since we use Feathers JS, we don't need to ********/
+/*********** connect directly to GitHub anymore. ***********/
+/***********************************************************/
+const gho_client_id = '91a6f70a71bfd3da345f'; // Testing purpose only
+const gho_client_secret = 'a7314b1c7dd63a3207d0ff759c37c009cf5c3632' // Testing purpose only
 
 /***********************************************************/
 /********************* GitHub's OAuth **********************/
@@ -37,7 +39,7 @@ export async function loginWithGitHubThruFeathers(onSuccessHandler) {
 		loginSuccessCallback = onSuccessHandler;
 		Linking.addEventListener('url', handleFeathersRedirect);
 		console.log(Linking.createURL());
-		await WebBrowser.openBrowserAsync(feathersOAuthUrl);
+		await WebBrowser.openBrowserAsync(`${API_URL}/oauth/github`);
 	} catch (error) {
 		console.log(error);
 	}
