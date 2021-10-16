@@ -4,6 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import PlaygroundScreen from '../screens/PlaygroundScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,6 +25,14 @@ const TabNavigator = () => {
 				headerTitle: 'Titan Talks',
 				tabBarIcon: ({ color, size }) => (
 					<MaterialCommunityIcons name="magnify" color={color} size={size} />
+				),
+			}}
+		/>
+		<Tab.Screen name="Playground" component={PlaygroundScreen}
+			options={{
+				headerTitle: 'Playground',
+				tabBarIcon: ({ color, size }) => (
+					<MaterialCommunityIcons name="account-circle" color={color} size={size} />
 				),
 			}}
 		/>
