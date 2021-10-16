@@ -1,0 +1,61 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "YJZpd+FjabTS+sNzR4k7JTBKc/Y=",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+    "oauth": {
+      "redirect": "exp://127.0.0.1:19000/",
+      "google": {
+        "key": "<google oauth key>",
+        "secret": "<google oauth secret>",
+        "scope": [
+          "email",
+          "profile",
+          "openid"
+        ]
+      },
+      "facebook": {
+        "key": "<facebook oauth key>",
+        "secret": "<facebook oauth secret>"
+      },
+      "twitter": {
+        "key": "<twitter oauth key>",
+        "secret": "<twitter oauth secret>"
+      },
+      "github": {
+        "key": "91a6f70a71bfd3da345f",
+        "secret": "a7314b1c7dd63a3207d0ff759c37c009cf5c3632"
+      }
+    }
+  },
+  "sqlite": {
+    "client": "sqlite3",
+    "connection": {
+      "filename": "server.db"
+    }
+  }
+}
