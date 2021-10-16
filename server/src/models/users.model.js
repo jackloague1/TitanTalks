@@ -11,7 +11,7 @@ module.exports = function (app) {
   db.schema.hasTable(tableName).then(exists => {
     if(!exists) {
       db.schema.createTable(tableName, table => {
-        table.increments('id');
+        table.increments('user_id');
       
         table.string('email').unique();
         table.string('password');
