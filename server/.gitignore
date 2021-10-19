@@ -1,3 +1,7 @@
+# CPSC 362 - Group 1
+*.db
+config/default.json
+
 # Logs
 logs
 *.log

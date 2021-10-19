@@ -1,5 +1,5 @@
 {
-  "host": "localhost",
+  "host": "YOUR_SERVER_IP_ADDRESS / DOMAIN",
   "port": 3030,
   "public": "../public/",
   "paginate": {
@@ -28,7 +28,7 @@
       "passwordField": "password"
     },
     "oauth": {
-      "redirect": "exp://127.0.0.1:19000/",
+      "redirect": "YOUR_EXPO_LINK , for example exp://127.0.0.1:19000/",
       "google": {
         "key": "<google oauth key>",
         "secret": "<google oauth secret>",
@@ -47,8 +47,8 @@
         "secret": "<twitter oauth secret>"
       },
       "github": {
-        "key": "91a6f70a71bfd3da345f",
-        "secret": "a7314b1c7dd63a3207d0ff759c37c009cf5c3632"
+        "key": "YOUR_GITHUB_OAUTH_API_KEY",
+        "secret": "YOUR_GITHUB_OAUTH_API_SECRET"
       }
     }
   },
