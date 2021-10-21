@@ -71,22 +71,7 @@ class PostItem extends Component {
 
 const HomeScreen = ({ navigation }) => {
 	return (
-		<><View style={styles.overlay}>
-			<Text style={{ fontSize: 36 }}>Titan Talks</Text>
-		</View>
-		<View style={{
-				height: 1,
-				backgroundColor: 'white'
-			}}>
-		</View>
-		<View style={{ backgroundColor: 'gray' }}>
-			<TouchableOpacity>
-			<Image
-			source = {require("../assets/create-post.png")}
-			style={{ width: 100, height: 100, marginTop: 22, marginBottom: 22, marginLeft: 22 }}>
-			</Image>
-			</TouchableOpacity>
-		</View>
+		<>
 		<View style={{ marginTop: 0 }}>
 				<FlatList
 					data={MOCKDATA} // Store MOCKDATA array in variable
@@ -98,6 +83,7 @@ const HomeScreen = ({ navigation }) => {
 
 							</PostItem>);
 					} }
+					keyExtractor={(item, index) => index.toString()}
 				>
 				</FlatList>
 			</View></>

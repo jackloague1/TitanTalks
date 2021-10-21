@@ -8,10 +8,12 @@ const ProfileScreen = ({navigation}) => {
 
 	return (
 		<View style={sty.container}>
-			<Image style = {sty.profImg} source={require("https://cdn.discordapp.com/attachments/895774463726059530/900814056682840144/ProfileIMG.jpg")}/>
+			<Image style = {sty.profImg} 
+				source={{uri: "https://cdn.discordapp.com/attachments/895774463726059530/900814056682840144/ProfileIMG.jpg"}}
+				/>
 			<Image style = {sty.profLogo} source={require("../assets/titantalksLogo.png")}/>
-			<Text style={sty.profName}>Nguyen Nguyen</Text>
-			<Text style={sty.profID}>nguyen.nguyen</Text>
+			<Text style={sty.profName}>Sophia Lopez</Text>
+			<Text style={sty.profID}>007</Text>
 
 			<Text style={sty.profBio}>Stay motivated and Keep Inspiring</Text>	
 			<Text>
@@ -68,7 +70,7 @@ const sty = StyleSheet.create({
 		alignItems:'center'
 	},
 	profBio:{
-		marginBottom:30,
+		marginTop:30,
 		color: "#ffffff"
 	},
 })
