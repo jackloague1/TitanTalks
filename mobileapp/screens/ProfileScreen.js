@@ -1,15 +1,15 @@
 import React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { AuthContext } from '../components/Context';
-import * as AuthHelper from '../utils/AuthHelper';
 
 const ProfileScreen = ({navigation}) => {
-	const { logout } = React.useContext(AuthContext);
+	const { logout, logoutGitHub } = React.useContext(AuthContext);
 
 	return (
 		<View style={styles.container}>
 			<Text>This is Profile Screen</Text>
 			<Button onPress={logout} title="Logout" />
+			<Button onPress={logoutGitHub} title="Fully Logout of GitHub" />
 		</View>
 	);
 }

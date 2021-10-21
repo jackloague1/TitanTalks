@@ -37,7 +37,7 @@ export async function getRequestAsync(service, path, timeout = 3000) {
 	})		
 }
 
-export async function postRequestAsync(service, data) {
+export async function postRequestAsync(service, data, timeout = 3000) {
 	const token = await AuthHelper.getAccessToken();
 
 	return fetchWithTimeout(`${baseURL}/${service}`, {
@@ -47,6 +47,7 @@ export async function postRequestAsync(service, data) {
 			'authorization': `${ token }`,
 			'content-type': 'application/json'
 		},
+		timeout: timeout,
 		body: JSON.stringify(data)
 	}).then(response => {
 		if (response.status >= 200 && response.status <= 299) {
@@ -65,7 +66,7 @@ export async function postRequestAsync(service, data) {
 	})
 }
 
-export async function patchRequestAsync(service, path, data) {
+export async function patchRequestAsync(service, path, data, timeout = 3000) {
 	const token = await AuthHelper.getAccessToken();
 
 	return fetchWithTimeout(`${baseURL}/${service}/${path}`, {
@@ -75,6 +76,7 @@ export async function patchRequestAsync(service, path, data) {
 			'authorization': `${ token }`,
 			'content-type': 'application/json'
 		},
+		timeout: timeout,
 		body: JSON.stringify(data)
 	}).then(response => {
 		if (response.status >= 200 && response.status <= 299) {
@@ -93,7 +95,7 @@ export async function patchRequestAsync(service, path, data) {
 	})
 }
 
-export async function deleteRequestAsync(service, path) {
+export async function deleteRequestAsync(service, path, timeout = 3000) {
 	const token = await AuthHelper.getAccessToken();
 	return fetchWithTimeout(`${baseURL}/${service}/${path}`, {
 		method: 'DELETE',
@@ -101,7 +103,8 @@ export async function deleteRequestAsync(service, path) {
 			'accept': 'application/json',
 			'authorization': `${ token }`,
 			'content-type': 'application/json'
-		}
+		},
+		timeout: timeout
 	}).then(response => {
 		if (response.status >= 200 && response.status <= 299) {
 			return response.json();

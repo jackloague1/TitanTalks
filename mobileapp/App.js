@@ -46,6 +46,12 @@ export default function App() {
 			setUserToken(null);
 			AuthHelper.logout();
 		},
+		logoutGitHub: () => {
+			AuthHelper.logoutGitHub().then(() => {
+				setUserToken(null);
+				AuthHelper.logout();
+			});			
+		},
 		signUp: async (data) => {
 			alert('SIGNUP FEATURE IS NOT IMPLEMENTED');
 		},
