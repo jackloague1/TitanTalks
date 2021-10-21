@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View, StyleSheet, Button,Image } from 'react-native';
 import { AuthContext } from '../components/Context';
-import * as AuthHelper from '../utils/AuthHelper';
 
 const ProfileScreen = ({navigation}) => {
-	const { logout } = React.useContext(AuthContext);
-	
+
+	const { logout, logoutGitHub } = React.useContext(AuthContext);
+
 	return (
 		<View style={sty.container}>
 			<Image style = {sty.profImg} source={require("https://cdn.discordapp.com/attachments/895774463726059530/900814056682840144/ProfileIMG.jpg")}/>
@@ -29,7 +29,7 @@ const ProfileScreen = ({navigation}) => {
 			<Text> 
 				</Text>
 			<Button onPress={logout} title="Logout" />
-
+      <Button onPress={logoutGitHub} title="Fully Logout of GitHub" />
 	</View>
 	)}
 

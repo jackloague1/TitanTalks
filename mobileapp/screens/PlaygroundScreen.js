@@ -1,11 +1,10 @@
 import React from 'react';
 import { Button, Text, View, StyleSheet } from 'react-native';
-import * as DataAPI from '../utils/DataAPI';
+import * as PostService from '../services/PostService';
 
 const PlaygroundScreen = ({navigation}) => {
 	return (
 		<View style={styles.container}>
-			<Text>Squid Game Playground</Text>
 			<Button title="Create a Post" onPress={test_createPost} />
 			<Button title="Get a Post" onPress={test_getPost} />
 			<Button title="Get all Posts" onPress={test_getAllPosts} />
@@ -16,12 +15,12 @@ const PlaygroundScreen = ({navigation}) => {
 }
 
 async function test_getPost() {
-	let serverResponseData = await DataAPI.getPost(1);
+	let serverResponseData = await PostService.getPostAsync(1);
 	console.log(serverResponseData);
 }
 
 async function test_getAllPosts() {
-	let serverResponseData = await DataAPI.getAllPosts();
+	let serverResponseData = await PostService.getAllPostsAsync();
 	console.log(serverResponseData);
 }
 
@@ -32,7 +31,7 @@ async function test_createPost() {
 		likes: 99
 	}
 
-	let serverResponseData = await DataAPI.insertPost(data);
+	let serverResponseData = await PostService.insertPostAsync(data);
 	console.log('----- Created Post -----');
 	console.log(serverResponseData);
 }
@@ -46,7 +45,7 @@ async  function test_editPost() {
 		likes: 14
 	}
 
-	let serverResponseData = await DataAPI.updatePost(postID, data);
+	let serverResponseData = await PostService.updatePostAsync(postID, data);
 	console.log('----- Updated Post -----');
 	console.log(serverResponseData);
 }
@@ -54,7 +53,7 @@ async  function test_editPost() {
 async function test_deletePost() {
 	let postID = 2; // An ID of a post you want to delete
 
-	let serverResponseData = await DataAPI.deletePost(postID);
+	let serverResponseData = await PostService.deletePostAsync(postID);
 	console.log('----- Deleted Post -----');
 	console.log(serverResponseData);
 }
