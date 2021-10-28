@@ -7,7 +7,7 @@ import * as Linking from "expo-linking";
 import { Platform } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as SecureStore from 'expo-secure-store';
-import { API_URL } from 'react-native-dotenv'
+import { API_URL } from 'react-native-dotenv';
 
 /***********************************************************/
 /************** GitHub Direct Connect Configs **************/
@@ -47,6 +47,15 @@ export async function loginWithGitHubThruFeathers(onSuccessHandler) {
 
 export async function logout() {
 	await deleteAccessToken();
+}
+
+export async function logoutGitHub() {
+	try {
+		await WebBrowser.openBrowserAsync('https://github.com/logout/');
+		await deleteAccessToken();
+	} catch (error) {
+	  console.error(error);
+	}
 }
 
 async function requestGitHubAccessToken(code) {
