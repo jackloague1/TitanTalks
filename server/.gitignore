@@ -1,6 +1,7 @@
 # CPSC 362 - Group 1
 *.db
 config/default.json
+public/uploads
 
 # Logs
 logs
