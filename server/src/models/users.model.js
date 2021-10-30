@@ -15,15 +15,14 @@ module.exports = function (app) {
       
         table.string('email').unique();
         table.string('password');
-      
-      
-        table.string('googleId');
-      
-        table.string('facebookId');
-      
-        table.string('twitterId');
-      
+        table.string('googleId');      
+        table.string('facebookId');      
+        table.string('twitterId');      
         table.string('githubId');
+        table.string('nickname');
+        table.string('fullname');
+        table.string('bio');
+        table.string('avatar');
       
       })
         .then(() => console.log(`Created ${tableName} table`))

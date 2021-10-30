@@ -9,10 +9,10 @@ import { API_URL } from 'react-native-dotenv'
 
 const baseURL = API_URL;
 
-export async function getRequestAsync(service, path, timeout = 3000) {
+export async function getRequestAsync(service, parameter, timeout = 3000) {
 	const token = await AuthHelper.getAccessToken();
 
-	return fetchWithTimeout(`${baseURL}/${service}/${path}`, {
+	return fetchWithTimeout(`${baseURL}/${service}/${parameter}`, {
 		method: 'GET',
 		headers: {
 			'accept': 'application/json',
@@ -66,10 +66,39 @@ export async function postRequestAsync(service, data, timeout = 3000) {
 	})
 }
 
-export async function patchRequestAsync(service, path, data, timeout = 3000) {
+export async function postMultiPartDataAsync(service, data, timeout = 10000) {
+	const token = await AuthHelper.getAccessToken();
+	
+	return await fetchWithTimeout(`${baseURL}/${service}`, {
+		method: 'POST',
+		headers: {
+			'accept': 'application/json',
+			'authorization': `${ token }`,
+			'content-type': 'multipart/form-data'
+		},
+		timeout: timeout,
+		body: data
+	}).then(response => {
+		if (response.status >= 200 && response.status <= 299) {
+			return response.json();
+		}
+		else {
+			throw Error(response.status);
+		}
+	}).catch(error => {
+		if (error.name === 'AbortError')
+		{
+			throw new Error('timeout');
+		} else {
+			throw new Error(error.message);
+		}
+	})
+}
+
+export async function patchRequestAsync(service, parameter, data, timeout = 3000) {
 	const token = await AuthHelper.getAccessToken();
 
-	return fetchWithTimeout(`${baseURL}/${service}/${path}`, {
+	return fetchWithTimeout(`${baseURL}/${service}/${parameter}`, {
 		method: 'PATCH',
 		headers: {
 			'accept': 'application/json',
@@ -95,9 +124,9 @@ export async function patchRequestAsync(service, path, data, timeout = 3000) {
 	})
 }
 
-export async function deleteRequestAsync(service, path, timeout = 3000) {
+export async function deleteRequestAsync(service, parameter, timeout = 3000) {
 	const token = await AuthHelper.getAccessToken();
-	return fetchWithTimeout(`${baseURL}/${service}/${path}`, {
+	return fetchWithTimeout(`${baseURL}/${service}/${parameter}`, {
 		method: 'DELETE',
 		headers: {
 			'accept': 'application/json',
