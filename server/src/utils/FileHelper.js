@@ -5,7 +5,7 @@ module.exports = class FileHelper {
 		// Create Directories & Filename 
 		let dt = new Date();
 		let basedir = 'public';
-		let relativePath = `${targetDir}/${dt.getFullYear()}/${dt.getMonth()}/${dt.getDay()}`;
+		let relativePath = `${targetDir}/${dt.getFullYear()}/${dt.getMonth() + 1}/${dt.getDay()}`;
 		let directoryPath = `${basedir}/${relativePath}`;
 		let filename = `${dt.getTime()}.${originalname.split('.').pop()}`;
 
