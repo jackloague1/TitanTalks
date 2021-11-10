@@ -8,6 +8,7 @@ import LoginScreen from './screens/LoginScreen';
 import { AuthContext } from './components/Context';
 import * as AuthHelper from './utils/AuthHelper';
 import * as ServerService from './services/ServerService';
+import * as HttpClient from './services/HttpClient';
 
 import { API_URL } from 'react-native-dotenv'
 
@@ -21,9 +22,14 @@ export default function App() {
 		const bootstrapAsync = async () => {	
 			try {
 				token = await AuthHelper.getAccessToken();
-				await setUserToken(token);
+				setUserToken(token);
 				console.log('---------- App Start ----------');
 				console.log(`Access Token: ${token}`);
+
+				if (! await isTokenValid()) {
+					console.log('Token is NOT valid');
+					setUserToken(null);
+				}
 			} catch (e) {
 				console.log('Restoring token failed');
 			}
@@ -57,6 +63,17 @@ export default function App() {
 		},
 	}),[]);
 
+	async function isTokenValid() {
+		// Temporary solution to check if token is valid
+		try {
+			await HttpClient.getRequestAsync('users', '1');
+			return true;
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
+	}
+	
 	async function getReadyForAuthentication() {		
 		return ServerService.getStatusAsync().then((response) => {
 			const appURL = Linking.createURL();
