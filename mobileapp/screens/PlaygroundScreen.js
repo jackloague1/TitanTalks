@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Alert, Image, Button, Text, TextInput, View, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as PostService from '../services/PostService';
+import * as UserService from '../services/UserService';
 
 const PlaygroundScreen = ({ navigation }) => {
 	/** Form Data */
@@ -48,8 +49,41 @@ const PlaygroundScreen = ({ navigation }) => {
 
 			<Text style={{ fontSize: 20 }}>Example 4: Delete a Post</Text>
 			<Button title="Delete a Post" onPress={test_deletePost} />
+
+			<Text style={{ fontSize: 20 }}>Example 4: Add Bio</Text>
+			<Button title="Add Bio" onPress={test_addBio} />
+
+			<Text style={{ fontSize: 20 }}>Example 4: Get Bio</Text>
+			<Button title="Get Bio" onPress={test_getBio} />
 		</View>
 	);
+}
+
+// EXAMPLE: ADD BIO INFO
+async function test_addBio() {
+	const user = {
+		email: 'titanMan@csu.fullerton.edu'
+	}
+	const serverResponse = await UserService.insertUserAsync(user);
+
+	console.log('---- Added Bio ----');
+	console.log(serverResponse);
+	if (serverResponse) {
+		Alert.alert('Write Success', JSON.stringify(serverResponse, null, 2));
+	}
+}
+
+// Example: Display Bio Info
+async function test_getBio() {
+	const userID = 1;
+	const serverResponse = await UserService.getUserAsync(userID);
+	
+	console.log(serverResponse);
+	if (serverResponse) {
+		Alert.alert('Read Success', JSON.stringify(serverResponse, null, 2));
+	} else {
+		Alert.alert('Read Failed', `Can not read post #${userID}`);
+	}
 }
 
 // EXAMPLE 1: How to Create a Post

@@ -5,6 +5,7 @@ import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import PlaygroundScreen from '../screens/PlaygroundScreen';
+import NewsScreen from '../screens/NewsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,6 +40,14 @@ const TabNavigator = () => {
 		<Tab.Screen name="My Profile" component={ProfileScreen}
 			options={{
 				headerTitle: 'Sophia Lopez',
+				tabBarIcon: ({ color, size }) => (
+					<MaterialCommunityIcons name="account-circle" color={color} size={size} />
+				),
+			}}
+		/>
+		<Tab.Screen name="Titan News Feed" component={NewsScreen}
+			options={{
+				headerTitle: 'Latest News Feed',
 				tabBarIcon: ({ color, size }) => (
 					<MaterialCommunityIcons name="account-circle" color={color} size={size} />
 				),
