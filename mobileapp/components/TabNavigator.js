@@ -45,11 +45,11 @@ const TabNavigator = () => {
 				),
 			}}
 		/>
-		<Tab.Screen name="Titan News Feed" component={NewsScreen}
+		<Tab.Screen name="News Feed" component={NewsScreen}
 			options={{
 				headerTitle: 'Latest News Feed',
 				tabBarIcon: ({ color, size }) => (
-					<MaterialCommunityIcons name="account-circle" color={color} size={size} />
+					<MaterialCommunityIcons name="newspaper-variant-multiple" color={color} size={size} />
 				),
 			}}
 		/>
