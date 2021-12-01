@@ -4,7 +4,7 @@ import { Text, View, StyleSheet } from 'react-native';
 const NewsScreen = ({navigation}) => {
 	return (
 		<View style={styles.container}>
-			<Text>This is Search Screen</Text>
+			<Text>Latest News Screen</Text>
 		</View>
 	);
 }
