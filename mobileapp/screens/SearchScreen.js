@@ -62,13 +62,7 @@ export default function Searchbar({ value, updateSearch, style }) {
             <Text style={sty.jackinp}> Jack </Text>
             </TouchableOpacity>
             </View>
-            <View>
-            <Image style = {sty.latestimg} 
-
-				source={{uri: "https://media.discordapp.net/attachments/767331708735324194/910757004765704202/index.jpg"}}/>
             
-            
-            </View>
         </View >
     )
 }
@@ -151,13 +145,7 @@ const sty = StyleSheet.create({
         marginLeft: 260,
 		marginTop:10,
     },
-    latestimg:{
-        
-        width: 210,
-		height:100,
-		marginLeft: 10,
-		marginTop:10,
-    }
+    
   
 });
 
