@@ -1,6 +1,9 @@
 # TitanTalks
 Titan Talks is a social media platform designed and created specifically for Titans. A place where you can connect and interact with Titans all across campus. From sharing images to simply chatting and even talking to others, there's a place for every Titan here.
 
+# Scrum Artifacts
+The product definition, which contains the planned features, user personas, and user stories for the project can be viewed in the "Product Definition" PDF file. The product backlog for each sprint can be viewed in its repsective product backlog PDF file. The sprint backlogs, which contain the various tasks worked on every sprint can be viewed by navigating to the "Projects" tab of this repository and choosin
+
 ## Environment Installation
 * Download and install NodeJS [https://nodejs.org/](https://nodejs.org/en/)
 * Install Expo CLI `npm install -g expo-cli`
